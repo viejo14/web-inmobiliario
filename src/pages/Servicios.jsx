@@ -37,7 +37,7 @@ export default function Servicios() {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
           {services.slice(0, 3).map((service, idx) => (
-              <div key={idx} className="bg-white/70 rounded-full shadow-lg flex flex-col items-center justify-center w-80 h-80 p-10">
+              <div key={idx} className="bg-primary/10 rounded-full shadow-lg flex flex-col items-center justify-center w-80 h-80 p-10">
               <img src={service.img} alt={service.title} className="w-24 h-24 object-contain mb-4 rounded-full" />
               <div className="text-primary font-semibold text-center text-lg mb-2">{service.title}</div>
               <div className="text-secondary text-center text-base">{service.desc}</div>
@@ -46,7 +46,7 @@ export default function Servicios() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-items-center mt-10">
           {services.slice(3).map((service, idx) => (
-            <div key={idx} className="bg-white/70 rounded-full shadow-lg flex flex-col items-center justify-center w-72 h-72 p-8">
+            <div key={idx} className="bg-primary/10 rounded-full shadow-lg flex flex-col items-center justify-center w-72 h-72 p-8">
               <img src={service.img} alt={service.title} className="w-24 h-24 object-contain mb-4 rounded-full" />
               <div className="text-primary font-semibold text-center text-lg mb-2">{service.title}</div>
               <div className="text-secondary text-center text-base">{service.desc}</div>

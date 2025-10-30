@@ -1,5 +1,7 @@
 
 import Header from './components/Header'
+import PoliticaPrivacidad from './pages/PoliticaPrivacidad';
+import Contact from './components/Contact';
 import Home from './pages/Home';
 import Servicios from './pages/Servicios';
 import Nosotros from './pages/Nosotros';
@@ -17,6 +19,8 @@ function App(){
           <Route path="/properties" element={<Properties />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/servicios" element={<Servicios />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
         </Routes>
         <Footer />
       </div>

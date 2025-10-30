@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaUserCheck, FaAward, FaRegEye, FaNetworkWired } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
 import Hero from '../components/Hero';
@@ -14,22 +15,22 @@ export default function Home() {
       {/* Ventajas de la empresa */}
       <section className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="flex flex-col items-center">
-          <FaUserCheck className="w-16 h-16 mb-3 text-primary" />
+          <FaUserCheck className="w-16 h-16 mb-3 text-white/90" />
           <div className="font-bold text-primary mb-1">Atención personalizada</div>
           <div className="text-white text-center text-sm">Te acompañamos en cada paso del proceso.</div>
         </div>
         <div className="flex flex-col items-center">
-          <FaAward className="w-16 h-16 mb-3 text-primary" />
+          <FaAward className="w-16 h-16 mb-3 text-white/90" />
           <div className="font-bold text-primary mb-1">Experiencia comprobada</div>
           <div className="text-white text-center text-sm">Años de trayectoria en el rubro inmobiliario.</div>
         </div>
         <div className="flex flex-col items-center">
-          <FaRegEye className="w-16 h-16 mb-3 text-primary" />
+          <FaRegEye className="w-16 h-16 mb-3 text-white/90" />
           <div className="font-bold text-primary mb-1">Transparencia</div>
           <div className="text-white text-center text-sm">Procesos claros y honestos para tu tranquilidad.</div>
         </div>
         <div className="flex flex-col items-center">
-          <FaNetworkWired className="w-16 h-16 mb-3 text-primary" />
+          <FaNetworkWired className="w-16 h-16 mb-3 text-white/90" />
           <div className="font-bold text-primary mb-1">Red de brókers</div>
           <div className="text-white text-center text-sm">Acceso a las mejores oportunidades del mercado.</div>
         </div>
@@ -91,13 +92,7 @@ export default function Home() {
       {/* Contacto rápido */}
       <section className="max-w-6xl mx-auto px-4 py-12 text-center">
         <h2 className="text-2xl font-bold text-primary mb-6">¿Tienes dudas o quieres cotizar?</h2>
-        <a href="/contact" className="bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg inline-block hover:bg-primary/80 transition">Contáctanos</a>
-      </section>
-
-      {/* Presentación breve */}
-      <section className="max-w-4xl mx-auto px-4 py-12 text-center">
-        <h2 className="text-2xl font-bold text-primary mb-4">¿Quiénes somos?</h2>
-        <p className="text-white text-base">Somos una empresa de gestión e intermediación inmobiliaria con enfoque prioritario en las personas. Representamos a clientes que confían en nuestra experticia y herramientas desarrolladas con dedicación. Nuestro objetivo es simple: merecer clientes de por vida.</p>
+          <Link to="/contact" className="bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg inline-block hover:bg-primary/80 transition">Contáctanos</Link>
       </section>
 
       <main className="bg-secondary">
