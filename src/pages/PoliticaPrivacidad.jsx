@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PoliticaPrivacidad() {
+function PoliticaPrivacidad() {
   return (
     <main className="min-h-screen bg-white/90">
       <section className="max-w-3xl mx-auto px-4 py-10">
@@ -27,3 +27,5 @@ export default function PoliticaPrivacidad() {
     </main>
   );
 }
+
+export default PoliticaPrivacidad;

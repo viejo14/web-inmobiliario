@@ -4,15 +4,15 @@ import PropertiesList from './components/properties/PropertiesList';
 // Puedes importar PropertyCard si ya existe
 // import PropertyCard from '../components/PropertyCard';
 
-export default function Properties() {
+function Properties() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   console.log(data.properties);
   /*useEffect(() => {
     // Reemplaza la URL por la ruta real de la API de procanje.com
-    //fetch('https://procanje.com/api/properties')
-    //  .then(res => res.json())
-    //  .then(data => {
+    fetch('https://procanje.com/api/properties')
+      .then(res => res.json())
+      .then(data => {
         setProperties(data);
         setLoading(false);
       })
@@ -21,7 +21,7 @@ export default function Properties() {
 
   return (
     <main className="min-h-screen bg-white/90">
-      <section className="max-w-6xl mx-auto px-4 py-10">
+      <section className="max-w-[90rem] mx-auto px-4 py-10">
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-8">Encuentra Tu Hogar</h1>
         {/* Filtros de búsqueda */}
         <div className="bg-primary/10 backdrop-blur-md rounded-xl border border-white/30 p-6 mb-10 flex flex-col gap-4">
@@ -61,3 +61,5 @@ export default function Properties() {
     </main>
   );
 }
+
+export default Properties;

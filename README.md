@@ -11,6 +11,18 @@ Currently, two official plugins are available:
 
 The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Expanding the ESLint configuration
+## EmailJS configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+El formulario de `src/components/Contact.jsx` usa EmailJS para enviar correos desde el navegador. Configura tu cuenta y agrega estas variables al archivo `.env`:
+
+```
+VITE_EMAILJS_SERVICE_ID=tu_service_id
+VITE_EMAILJS_ADMIN_TEMPLATE_ID=tu_template_admin
+VITE_EMAILJS_PUBLIC_KEY=tu_public_key
+VITE_EMAILJS_ADMIN_TO_EMAIL=fcampospino754@gmail.com
+```
+
+- La plantilla de administrador debe tener definido el destinatario (To) con el correo del dueno o equipo.
+- El formulario actualmente solo envia notificaciones al administrador. Si mas adelante deseas agregar un correo de confirmacion al cliente, deberas crear una segunda plantilla en EmailJS y actualizar el codigo para usarla.
+
+Reinicia el servidor de desarrollo despues de modificar `.env`. Si alguna variable falta, el formulario mostrara un mensaje de error y no intentara enviar correos.

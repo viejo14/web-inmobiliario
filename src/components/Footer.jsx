@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 
-export default function Footer(){
+function Footer(){
   return (
   <footer className="w-full bg-gradient-to-l from-primary via-secondary to-primary text-white shadow-2xl">
       <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
@@ -40,3 +40,5 @@ export default function Footer(){
     </footer>
   )
 }
+
+export default Footer;

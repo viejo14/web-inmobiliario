@@ -28,7 +28,7 @@ const services = [
   },
 ];
 
-export default function Servicios() {
+function Servicios() {
   return (
     <main className="min-h-screen bg-white/90">
       <section className="max-w-6xl mx-auto px-4 py-16">
@@ -57,3 +57,5 @@ export default function Servicios() {
     </main>
   );
 }
+
+export default Servicios;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 
-export default function Nosotros() {
+function Nosotros() {
   return (
     <main className="min-h-screen bg-white/90">
       <section className="max-w-5xl mx-auto px-4 py-16">
@@ -60,3 +60,5 @@ export default function Nosotros() {
     </main>
   );
 }
+
+export default Nosotros;
