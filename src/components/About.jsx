@@ -2,7 +2,7 @@ import React from 'react';
 
 function About() {
   return (
-    <section id="about" className="relative bg-white py-20 overflow-hidden">
+    <section id="about" className="relative bg-white/90 py-20 overflow-hidden">
       {/* Elementos decorativos de fondo */}
       <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-[#981d97] opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-[#2e092d] opacity-5 rounded-full translate-x-1/2 translate-y-1/2"></div>
@@ -75,7 +75,7 @@ function About() {
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden h-96 lg:h-[500px] bg-gray-200">
               {/* Imagen desde URL con overlay degradado (mantiene legibilidad) */}
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1400&q=80')` }} />
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('src/assets/img/base_logo_transparent_background.png')` }} />
               <div className="absolute inset-0 bg-gradient-to-br from-[#981d97] to-[#2e092d] opacity-20 flex items-center justify-center">
                 <span className="text-[#2e092d] text-lg font-medium">Equipo BDR / Imagen representativa</span>
               </div>
@@ -83,7 +83,7 @@ function About() {
             
             {/* Elemento decorativo */}
             <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#981d97] rounded-2xl opacity-10"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#2e092d] rounded-2xl opacity-10"></div>
+            <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#981d97] rounded-2xl opacity-10"></div>
           </div>
 
         </div>

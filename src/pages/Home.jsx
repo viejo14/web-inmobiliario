@@ -9,7 +9,7 @@ import Contact from '../components/Contact';
 
 function Home() {
   return (
-    <>
+    <div className="w-full overflow-hidden">
       <Hero />
 
       {/* Ventajas de la empresa */}
@@ -100,7 +100,7 @@ function Home() {
         <Services />
         <Contact />
       </main>
-    </>
+    </div>
   );
 }
 

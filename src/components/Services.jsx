@@ -38,8 +38,7 @@ function Services(){
   return (
     <section id="services" className="relative bg-[#2e092d] py-20 overflow-hidden">
       {/* Elementos decorativos de fondo */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-[#981d97] rounded-full opacity-5 translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full opacity-5 -translate-x-1/2 translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-[#981d97] opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
       
       <div className="max-w-6xl mx-auto px-4">
         {/* Header de la sección */}

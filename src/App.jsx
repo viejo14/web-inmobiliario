@@ -9,6 +9,7 @@ import Servicios from './pages/Servicios';
 import Nosotros from './pages/Nosotros';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Properties from './pages/Properties';
+import PropertyDetail from './pages/PropertyDetail';
 import Footer from './components/Footer'
 
 function App(){
@@ -28,12 +29,13 @@ function App(){
 
   return (
     <Router>
-      <div className="min-h-screen bg-secondary text-zinc-800 font-sans flex flex-col">
+      <div className="min-h-screen bg-secondary text-zinc-800 font-sans flex flex-col w-full overflow-x-hidden">
         <Header />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/properties" element={<Properties />} />
+            <Route path="/properties/:id" element={<PropertyDetail />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/contact" element={<Contact />} />

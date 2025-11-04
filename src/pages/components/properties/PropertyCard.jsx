@@ -1,24 +1,65 @@
 import React from 'react'
-// Función para limitar el largo de un string
-function truncateText(text, maxLength) {
-  if (!text) return '';
-  return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-}
+import { useNavigate } from 'react-router-dom';
 import { FaBed, FaBath, FaCar, FaRulerCombined } from 'react-icons/fa';
 
+// Función para limpiar HTML tags y limitar el largo de un string
+function truncateText(text, maxLength) {
+  if (!text) return '';
+  // Eliminar todas las etiquetas HTML
+  const cleanText = text.replace(/<[^>]*>/g, '');
+  return cleanText.length > maxLength ? cleanText.slice(0, maxLength) + '...' : cleanText;
+}
+
 const PropertyCard = ({ property }) => {
-  // ...existing code...
+  const navigate = useNavigate();
+
+  // Función para obtener la primera imagen disponible
+  const getPropertyImage = () => {
+    // Si images es un array de objetos con path
+    if (property.images && Array.isArray(property.images) && property.images.length > 0) {
+      const firstImage = property.images[0];
+
+      // Si el elemento es un string directo
+      if (typeof firstImage === 'string') {
+        return firstImage;
+      }
+
+      // Si el elemento es un objeto con path (estructura de Procanje)
+      if (typeof firstImage === 'object' && firstImage.path) {
+        return firstImage.path;
+      }
+
+      // Si el elemento es un objeto, intentar otras propiedades
+      if (typeof firstImage === 'object') {
+        const imageUrl = firstImage.url ||
+                        firstImage.imageUrl ||
+                        firstImage.src ||
+                        firstImage.link;
+
+        if (imageUrl) {
+          return imageUrl;
+        }
+      }
+    }
+
+    // Si tiene una propiedad mainImage
+    if (property.mainImage) {
+      return typeof property.mainImage === 'string' ? property.mainImage : property.mainImage.url;
+    }
+
+    // Imagen por defecto
+    return '/img/logo/logo-dark-full.png';
+  };
+
   return (
   <div className="bg-white rounded-xl shadow-lg border border-primary/20 p-4 flex flex-col items-center hover:shadow-2xl transition-shadow duration-200 h-full min-h-[34rem]">
       <img
-        src={
-          property.images?.[0] ??
-          property.images?.[1] ??
-          property.images?.[2] ??
-          '/img/logo/logo-dark-full.png'
-        }
+        src={getPropertyImage()}
         alt={property.propertyTitle}
         className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-200"
+        onError={(e) => {
+          e.target.src = '/img/logo/logo-dark-full.png';
+        }}
       />
       {/* Etiquetas tipo de propiedad y operación */}
       <div className="flex gap-2 mb-2 w-full justify-start">
@@ -26,8 +67,8 @@ const PropertyCard = ({ property }) => {
         <span className="bg-primary/60 text-white text-xs px-3 py-1 rounded-full font-semibold">{property.typeOfOperationId}</span>
         {property.isExchanged && <span className="bg-green-400 text-white text-xs px-3 py-1 rounded-full font-semibold">En Canje</span>}
       </div>
-      <h3 className="text-lg font-bold text-primary mb-2 text-center">{truncateText(property.propertyTitle, 50)}</h3>
-      <p className="text-gray-700 text-sm mb-2 text-center">{truncateText(property.propertyDescription, 100)}</p>
+      <h3 className="text-lg font-bold text-primary mb-2 text-center break-words w-full">{truncateText(property.propertyTitle, 50)}</h3>
+      <p className="text-gray-700 text-sm mb-2 text-center break-words overflow-hidden w-full">{truncateText(property.propertyDescription, 100)}</p>
       {/* Dirección */}
       <p className="text-xs text-gray-500 mb-2 text-center">
         {property.address?.city?.name}, {property.address?.state?.name}
@@ -153,7 +194,12 @@ const PropertyCard = ({ property }) => {
       </div>
       {/* Botones */}
       <div className="flex gap-2 mt-auto w-full justify-center">
-        <a href={property.externalLink} target="_blank" rel="noopener" className="bg-primary/10 text-primary px-4 py-2 rounded font-semibold text-xs hover:bg-primary/20 transition">Detalles</a>
+        <button
+          onClick={() => navigate(`/properties/${property.id}`)}
+          className="bg-primary/10 text-primary px-4 py-2 rounded font-semibold text-xs hover:bg-primary/20 transition"
+        >
+          Detalles
+        </button>
         <a href="/contact" className="bg-primary text-white px-4 py-2 rounded font-semibold text-xs hover:bg-primary/80 transition">Contactar</a>
       </div>
     </div>
