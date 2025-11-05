@@ -7,13 +7,12 @@ function Nosotros() {
   return (
     <main className="min-h-screen bg-white/90">
       {/* Imagen decorativa debajo del header */}
-      <div className="flex justify-center w-full" style={{marginTop: '0px'}}>
+      <div className="w-full" style={{marginTop: '0px'}}>
         <img
           src={imgNosotros}
           alt="Decoración Nosotros"
+          className="w-full"
           style={{
-            width: '100vw',
-            maxWidth: '2400px',
             height: '420px',
             objectFit: 'cover',
             opacity: 0.9,

@@ -88,7 +88,14 @@ function Footer(){
             {/* Contacto */}
             <div className="space-y-4">
               <div className="group">
-                <p className="text-white/40 text-xs mb-1">Teléfono</p>
+                <p className="text-white/40 text-xs mb-1">Teléfonos</p>
+                <a
+                  href="tel:+56232687386"
+                  className="text-white hover:text-[#981d97] transition-colors duration-300 text-sm font-light"
+                >
+                  +56 2 3268 7386
+                </a>
+                <span className="text-white/40 mx-2">/</span>
                 <a
                   href="tel:+56988985592"
                   className="text-white hover:text-[#981d97] transition-colors duration-300 text-sm font-light"
@@ -99,15 +106,15 @@ function Footer(){
               <div className="group">
                 <p className="text-white/40 text-xs mb-1">Email</p>
                 <a
-                  href="mailto:gonzalo.rojas@bienderaiz.cl"
+                  href="mailto:contacto@bienderaiz.cl"
                   className="text-white hover:text-[#981d97] transition-colors duration-300 text-sm font-light break-all"
                 >
-                  gonzalo.rojas@bienderaiz.cl
+                  contacto@bienderaiz.cl
                 </a>
               </div>
               <div>
                 <p className="text-white/40 text-xs mb-1">Ubicación</p>
-                <p className="text-white/60 text-sm font-light">Santiago, Chile</p>
+                <p className="text-white/60 text-sm font-light">Av. Manquehue Sur 520, of.205, Las Condes, Santiago, Chile</p>
               </div>
             </div>
           </div>
@@ -122,12 +129,6 @@ function Footer(){
             <div className="flex gap-8 text-white/40 text-sm">
               <a href="/politica-privacidad" className="hover:text-white transition-colors duration-300 font-light">
                 Privacidad
-              </a>
-              <a href="/terminos-servicio" className="hover:text-white transition-colors duration-300 font-light">
-                Términos
-              </a>
-              <a href="/cookies" className="hover:text-white transition-colors duration-300 font-light">
-                Cookies
               </a>
             </div>
           </div>

@@ -31,7 +31,7 @@ function Header(){
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between flex-wrap md:flex-nowrap">
         <div className="flex items-center gap-3 w-auto">
 
-          <img src="/img/logo_gonzalo.png" alt="Logo Gonzalo Rojas" className="w-20 h-20 object-contain rounded-full p-0 border-1 border-[#2e092d] shadow-md shadow-white/50" />
+          <img src="/img/logo_gonzalo.png" alt="Logo Gonzalo Rojas" className="bg-[#2e092d] w-20 h-20 object-contain rounded-full p-0 border-1 border-[#2e092d] shadow-md shadow-white/50" />
           <div>
             <div className="text-lg font-semibold text-white">Bien De Raíz Propiedades</div>
             <div className="text-xs text-white">Gestión e intermediación inmobiliaria</div>
