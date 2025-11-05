@@ -84,7 +84,7 @@ function PropertyDetail() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-white/90 flex items-center justify-center">
+      <main className="min-h-screen bg-white/90 pt-24 flex items-center justify-center">
         <div className="text-secondary text-xl">Cargando propiedad...</div>
       </main>
     );
@@ -92,7 +92,7 @@ function PropertyDetail() {
 
   if (error || !property) {
     return (
-      <main className="min-h-screen bg-white/90 flex items-center justify-center">
+      <main className="min-h-screen bg-white/90 pt-24 flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-600 text-xl mb-4">{error || 'Propiedad no encontrada'}</div>
           <button
@@ -107,7 +107,7 @@ function PropertyDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-white/90">
+    <main className="min-h-screen bg-white/90 pt-24">
       <section className="max-w-7xl mx-auto px-4 py-10">
         {/* Botón volver */}
         <button

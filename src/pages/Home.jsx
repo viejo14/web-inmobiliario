@@ -41,15 +41,15 @@ function Home() {
         <h2 className="text-xl font-bold text-primary mb-6 text-center">Nuestros Servicios</h2>
         <div className="flex flex-wrap justify-center gap-12">
           <a href="/servicios" className="flex flex-col items-center justify-center bg-white/90 rounded-full shadow-lg w-64 h-64 p-8 hover:bg-primary/10 transition">
-            <img src="/src/assets/img/Intermediación-asesoría-inmobiliaria.jpg" alt="Intermediación" className="w-24 h-24 mb-4 rounded-full object-cover" />
-            <div className="font-semibold text-primary text-lg text-center">Intermediación y asesoría</div>
+            <img src="img/Intermediacion-asesoria-inmobiliaria.jpg" alt="Intermediación" className="w-24 h-24 mb-4 rounded-full object-cover" />
+            <div className="font-semibold text-primary text-lg text-center">Intermediación, asesoría y búsqueda de propiedades</div>
           </a>
           <a href="/servicios" className="flex flex-col items-center justify-center bg-white/90 rounded-full shadow-lg w-64 h-64 p-8 hover:bg-primary/10 transition">
-            <img src="/src/assets/img/Compra-venta,-arriendo-permuta.jpg" alt="Compra y venta" className="w-24 h-24 mb-4 rounded-full object-cover" />
-            <div className="font-semibold text-primary text-lg text-center">Compra, venta, arriendo</div>
+            <img src="img/Compra-venta-arriendo-permuta.jpg" alt="Compra, venta, arriendo y administración" className="w-24 h-24 mb-4 rounded-full object-cover" />
+            <div className="font-semibold text-primary text-lg text-center">Compra, venta, arriendo y administración</div>
           </a>
           <a href="/servicios" className="flex flex-col items-center justify-center bg-white/90 rounded-full shadow-lg w-64 h-64 p-8 hover:bg-primary/10 transition">
-            <img src="/src/assets/img/Tasaciones-profesionales.jpg" alt="Tasaciones" className="w-24 h-24 mb-4 rounded-full object-cover" />
+            <img src="img/Tasaciones-profesionales.jpg" alt="Tasaciones" className="w-24 h-24 mb-4 rounded-full object-cover" />
             <div className="font-semibold text-primary text-lg text-center">Tasaciones profesionales</div>
           </a>
         </div>

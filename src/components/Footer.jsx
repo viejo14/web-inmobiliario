@@ -23,9 +23,9 @@ function Footer(){
             <div className="flex items-start gap-4 mb-6">
               <div className="relative">
                 <img 
-                  src="/src/assets/img/logo_gonzalo.png" 
+                  src="img/logo_gonzalo.png" 
                   alt="BDR Gestión Inmobiliaria" 
-                  className="w-14 h-14 object-contain rounded-xl"
+                  className="w-24 h-24 object-contain rounded-2xl"
                 />
                 <div className="absolute inset-0 border border-white/10 rounded-xl"></div>
               </div>

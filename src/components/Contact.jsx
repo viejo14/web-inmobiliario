@@ -6,7 +6,7 @@ function Contact() {
   const adminTemplateId = import.meta.env.VITE_EMAILJS_ADMIN_TEMPLATE_ID;
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
   const adminToEmail =
-    import.meta.env.VITE_EMAILJS_ADMIN_TO_EMAIL || 'fcampospino754@gmail.com';
+    import.meta.env.VITE_EMAILJS_ADMIN_TO_EMAIL;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -65,7 +65,7 @@ function Contact() {
   };
 
   return (
-    <div className="bg-white/90 relative w-full">
+    <div className="bg-white/90 relative w-full pt-24">
       {/* Elementos decorativos */}
       <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-[#981d97] opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-[#981d97] opacity-5 rounded-full translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
@@ -75,22 +75,19 @@ function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-secondary">
           <div>
             <p className="mb-1">
-              <strong>Nombre:</strong> Gonzalo Rojas Castro
+              <strong>Contacto:</strong> Bien de Raíz Propiedades
             </p>
             <p className="mb-1">
-              <strong>Compania:</strong> BDR Gestion Inmobiliaria SpA
+              <strong>Empresa:</strong> BDR Gestión Inmobiliaria SpA
             </p>
             <p className="mb-1">
-              <strong>Telefono:</strong>{' '}
-              <a href="tel:+56988985592" className="hover:underline">
-                +56 9 8898 5592
-              </a>
+              <strong>Teléfonos:</strong> 
+              <a href="tel:+56232687386" className="hover:underline">+56 2 3268 7386</a> / 
+              <a href="tel:+56988985592" className="hover:underline">+56 9 8898 5592</a>
             </p>
             <p className="mb-1">
-              <strong>Email:</strong>{' '}
-              <a href="mailto:gonzalo.rojas@bienderaiz.cl" className="hover:underline">
-                gonzalo.rojas@bienderaiz.cl
-              </a>
+              <strong>Correo:</strong> 
+              <a href="mailto:contacto@bienderaiz.cl" className="hover:underline">contacto@bienderaiz.cl</a>
             </p>
           </div>
           <div>

@@ -1,29 +1,30 @@
 import React from 'react';
+import imgServicios from '../../public/img/img-header/Diseno_carpeta.png';
 
 const services = [
   {
-    title: 'Intermediación y asesoría inmobiliaria',
-    img: '/src/assets/img/Intermediación-asesoría-inmobiliaria.jpg',
+    title: 'Intermediacion y asesoria inmobiliaria',
+    img: 'img/Intermediacion-asesoria-inmobiliaria.jpg',
     desc: 'Acompañamos y asesoramos en todo el proceso inmobiliario.'
   },
   {
     title: 'Compra, venta, arriendo y permuta',
-    img: '/src/assets/img/Compra-venta,-arriendo-permuta.jpg',
+    img: 'img/Compra-venta-arriendo-permuta.jpg',
     desc: 'Gestión integral en operaciones de compra, venta, arriendo y permuta de propiedades.'
   },
   {
     title: 'Tasaciones profesionales',
-    img: '/src/assets/img/Tasaciones-profesionales.jpg',
+    img: 'img/Tasaciones-profesionales.jpg',
     desc: 'Realizamos tasaciones precisas y confiables para tu propiedad.'
   },
   {
     title: 'Asesoría a inversionistas',
-    img: '/src/assets/img/Asesoría-inversionistas.jpg',
+    img: 'img/Asesoría-inversionistas.jpg',
     desc: 'Orientación en inversiones tanto en el mercado primario (nuevas) como secundario (usadas).'
   },
   {
     title: 'Brókers asociados',
-    img: '/src/assets/img/Brókers-asociados.jpg',
+    img: 'img/Brókers-asociados.jpg',
     desc: 'Trabajamos directamente como brókers asociados a las principales inmobiliarias.'
   },
 ];
@@ -31,6 +32,21 @@ const services = [
 function Servicios() {
   return (
     <main className="min-h-screen bg-white/90">
+      {/* Imagen decorativa debajo del header */}
+      <div className="flex justify-center w-full" style={{marginTop: '0px'}}>
+        <img
+          src={imgServicios}
+          alt="Decoración Servicios"
+          style={{
+            width: '100vw',
+            maxWidth: '2400px',
+            height: '420px',
+            objectFit: 'cover',
+            opacity: 0.9,
+            boxShadow: '0 12px 40px 0 rgba(0,0,0,0.18)'
+          }}
+        />
+      </div>
       <section className="max-w-6xl mx-auto px-4 py-16">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-10">
           Nuestros <span className="text-primary">Servicios</span>

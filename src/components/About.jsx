@@ -23,8 +23,7 @@ function About() {
 
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p className="text-lg">
-                En <strong className="text-[#981d97]">BDR Gestión Inmobiliaria</strong>, 
-                redefinimos el concepto de intermediación poniendo a las personas en el centro de cada decisión.
+                En <strong className="text-[#981d97]">Bien de Raíz</strong> redefinimos el concepto de intermediación poniendo a las personas en el centro de cada decisión.
               </p>
               
               <div className="space-y-3">
@@ -75,7 +74,7 @@ function About() {
           <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden h-96 lg:h-[500px] bg-gray-200">
               {/* Imagen desde URL con overlay degradado (mantiene legibilidad) */}
-              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('src/assets/img/base_logo_transparent_background.png')` }} />
+              <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('img/img-header/Diseno_carpeta.png')` }} />
               <div className="absolute inset-0 bg-gradient-to-br from-[#981d97] to-[#2e092d] opacity-20 flex items-center justify-center">
                 <span className="text-[#2e092d] text-lg font-medium">Equipo BDR / Imagen representativa</span>
               </div>
@@ -93,7 +92,7 @@ function About() {
           <blockquote className="max-w-3xl mx-auto text-xl italic text-gray-700">
             "No medimos nuestro éxito por transacciones cerradas, sino por relaciones construidas y objetivos cumplidos."
           </blockquote>
-          <p className="mt-4 text-[#981d97] font-medium">Gonzalo Rojas Castro - BDR Gestión Inmobiliaria</p>
+          <p className="mt-4 text-[#981d97] font-medium">Gonzalo Rojas Castro - Bien de Raíz</p>
         </div>
       </div>
     </section>

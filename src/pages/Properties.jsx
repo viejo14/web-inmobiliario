@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProperties } from '../services/propertiesService';
 import PropertiesList from './components/properties/PropertiesList';
+import imgProperties from '../../public/img/img-carrusel-hero/casa-en-l-madrid-iluminacion-led-porches.jpg';
 
 function Properties() {
   const [properties, setProperties] = useState([]);
@@ -166,6 +167,21 @@ function Properties() {
 
   return (
     <main className="min-h-screen bg-white/90">
+      {/* Imagen decorativa debajo del header */}
+      <div className="flex justify-center w-full" style={{marginTop: '0px'}}>
+        <img
+          src={imgProperties}
+          alt="Decoración Propiedades"
+          style={{
+            width: '100vw',
+            maxWidth: '2400px',
+            height: '420px',
+            objectFit: 'cover',
+            opacity: 0.9,
+            boxShadow: '0 12px 40px 0 rgba(0,0,0,0.18)'
+          }}
+        />
+      </div>
       <section className="max-w-[90rem] mx-auto px-4 py-10">
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-8">Encuentra Tu Hogar</h1>
         {/* Filtros de búsqueda */}

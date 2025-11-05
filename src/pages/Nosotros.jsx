@@ -1,16 +1,33 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
+import imgNosotros from '../../public/img/img-header/Diseno_targ_present.png';
+//../../public/img/img-header/Diseno_targ_present.png
 
 function Nosotros() {
   return (
     <main className="min-h-screen bg-white/90">
+      {/* Imagen decorativa debajo del header */}
+      <div className="flex justify-center w-full" style={{marginTop: '0px'}}>
+        <img
+          src={imgNosotros}
+          alt="Decoración Nosotros"
+          style={{
+            width: '100vw',
+            maxWidth: '2400px',
+            height: '420px',
+            objectFit: 'cover',
+            opacity: 0.9,
+            boxShadow: '0 12px 40px 0 rgba(0,0,0,0.18)'
+          }}
+        />
+      </div>
       <section className="max-w-5xl mx-auto px-4 py-16">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-10">
           Sobre <span className="text-primary">Nosotros</span>
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="w-full md:w-1/2 flex justify-center">
-            <img src="/src/assets/img/img_nosotros.png" alt="Equipo inmobiliario" className="rounded-xl shadow-lg w-full max-w-md object-cover" />
+            <img src="img/img-header/Certif.png" alt="Equipo inmobiliario" className="rounded-xl shadow-lg w-full max-w-md object-cover" />
           </div>
           <div className="w-full md:w-1/2">
             <h3 className="text-lg font-bold text-primary mb-2">Nuestra filosofía</h3>

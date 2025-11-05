@@ -1,5 +1,5 @@
 import React from 'react';
-import gifAnimacion from '../assets/img/animacion_BDR.gif';
+import gifAnimacion from '../../public/img/animacion_BDR.gif';
 
 export default function Loader({ fadeOut = false }) {
   const [fade, setFade] = React.useState(false);

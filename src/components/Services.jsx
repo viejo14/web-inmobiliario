@@ -3,33 +3,33 @@ import { FiUsers, FiHome, FiRepeat, FiBarChart2, FiTrendingUp, FiStar } from 're
 
 const services = [
   {
-    title: 'Intermediación Integral',
-    description: 'Representamos sus intereses en todo el proceso inmobiliario, asegurando las mejores condiciones y transparencia absoluta.',
+    title: 'Intermediación integral',
+    description: 'Te acompañamos en todo el proceso inmobiliario, asegurando las mejores condiciones y transparencia absoluta.',
     icon: <FiUsers />
   },
   {
-    title: 'Compra y Venta',
-    description: 'Asesoría especializada tanto en mercado primario (propiedades nuevas) como secundario (usadas).',
+    title: 'Compra y venta',
+    description: 'Encontramos la mejor alternativa para tus necesidades de vivienda o inversión.',
     icon: <FiHome />
   },
   {
-    title: 'Arriendo y Permuta',
-    description: 'Encontramos la mejor alternativa para sus necesidades de vivienda o inversión.',
+    title: 'Arriendo y Administración',
+    description: 'Nos hacemos cargo de todo lo necesario para que tu inversión dé los frutos y la rentabilidad esperada, maximizando los recursos y minimizando los riesgos que el arrendamiento de una propiedad conlleva.',
     icon: <FiRepeat />
   },
   {
-    title: 'Tasaciones Profesionales',
+    title: 'Tasaciones profesionales',
     description: 'Valuaciones precisas y actualizadas del mercado para tomar decisiones informadas.',
     icon: <FiBarChart2 />
   },
   {
-    title: 'Asesoría a Inversionistas',
+    title: 'Asesoría a inversionistas',
     description: 'Análisis de oportunidades y estrategias personalizadas para maximizar su rentabilidad.',
     icon: <FiTrendingUp />
   },
   {
-    title: 'Brokers Asociados',
-    description: 'Trabajamos con las principales inmobiliarias para ampliar sus oportunidades en el mercado.',
+    title: 'Bróker Asociados',
+    description: 'Trabajamos con las principales inmobiliarias para ampliar tus oportunidades en el mercado.',
     icon: <FiStar />
   }
 ]
