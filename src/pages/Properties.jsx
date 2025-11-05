@@ -41,10 +41,19 @@ function Properties() {
 
   // Función para manejar cambios en los filtros
   const handleFilterChange = (filterName, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterName]: value
-    }));
+    setFilters(prev => {
+      const newFilters = {
+        ...prev,
+        [filterName]: value
+      };
+
+      // Si se cambia la región, limpiar el filtro de ciudad
+      if (filterName === 'region') {
+        newFilters.city = '';
+      }
+
+      return newFilters;
+    });
   };
 
   // Función para aplicar los filtros
@@ -142,6 +151,15 @@ function Properties() {
   };
 
   const getUniqueCities = () => {
+    // Si hay una región seleccionada, filtrar ciudades solo de esa región
+    if (filters.region) {
+      const cities = properties
+        .filter(p => p.address?.state?.name === filters.region)
+        .map(p => p.address?.city?.name)
+        .filter(Boolean);
+      return [...new Set(cities)];
+    }
+    // Si no hay región seleccionada, mostrar todas las ciudades
     const cities = properties.map(p => p.address?.city?.name).filter(Boolean);
     return [...new Set(cities)];
   };

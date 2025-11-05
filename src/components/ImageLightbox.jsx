@@ -11,6 +11,41 @@ import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
  * @param {Function} onPrev - Callback para imagen anterior
  */
 function ImageLightbox({ isOpen, onClose, images, currentIndex, onNext, onPrev }) {
+  // Manejar el scroll del body
+  useEffect(() => {
+    if (isOpen) {
+      // Guardar el valor original
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+
+      // Restaurar al desmontar o cuando isOpen cambie
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
+
+  // Cerrar con tecla Escape y navegación con flechas
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowLeft') {
+        onPrev();
+      } else if (e.key === 'ArrowRight') {
+        onNext();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose, onNext, onPrev]);
+
   if (!isOpen || !images || images.length === 0) return null;
 
   const getCurrentImageUrl = () => {
@@ -18,39 +53,6 @@ function ImageLightbox({ isOpen, onClose, images, currentIndex, onNext, onPrev }
     if (typeof image === 'string') return image;
     return image?.path || image?.url || '/img/logo/logo-dark-full.png';
   };
-
-  // Cerrar con tecla Escape
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden'; // Prevenir scroll del body
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, onClose]);
-
-  // Navegación con flechas del teclado
-  useEffect(() => {
-    const handleKeyNav = (e) => {
-      if (e.key === 'ArrowLeft') onPrev();
-      if (e.key === 'ArrowRight') onNext();
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyNav);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyNav);
-    };
-  }, [isOpen, onNext, onPrev]);
 
   return (
     <div

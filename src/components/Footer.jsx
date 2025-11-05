@@ -34,7 +34,7 @@ function Footer(){
                   BDR
                 </h3>
                 <p className="text-white/40 text-sm font-light">
-                  Gestión Inmobiliaria SpA
+                  Bien de Raíz
                 </p>
               </div>
             </div>

@@ -33,7 +33,7 @@ function Header(){
 
           <img src="/src/assets/img/logo_gonzalo.png" alt="Logo Gonzalo Rojas" className="w-20 h-20 object-contain rounded-full p-0 border-1 border-[#2e092d] shadow-md shadow-white/50" />
           <div>
-            <div className="text-lg font-semibold text-white">BDR Gestión Inmobiliaria SpA</div>
+            <div className="text-lg font-semibold text-white">Bien De Raíz Propiedades</div>
             <div className="text-xs text-white">Gestión e intermediación inmobiliaria</div>
           </div>
 
