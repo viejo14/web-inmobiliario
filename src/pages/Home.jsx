@@ -92,7 +92,7 @@ function Home() {
       {/* Contacto rápido */}
       <section className="max-w-6xl mx-auto px-4 py-12 text-center">
         <h2 className="text-2xl font-bold text-primary mb-6">¿Tienes dudas o quieres cotizar?</h2>
-          <Link to="/contact" className="bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg inline-block hover:bg-primary/80 transition">Contáctanos</Link>
+          <Link to="/contacto" className="bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg inline-block hover:bg-primary/80 transition">Contáctanos</Link>
       </section>
 
       <main className="bg-secondary">

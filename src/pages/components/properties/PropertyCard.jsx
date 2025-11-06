@@ -195,12 +195,12 @@ const PropertyCard = ({ property }) => {
       {/* Botones */}
       <div className="flex gap-2 mt-auto w-full justify-center">
         <button
-          onClick={() => navigate(`/properties/${property.id}`)}
+          onClick={() => navigate(`/propiedades/${property.id}`)}
           className="bg-primary/10 text-primary px-4 py-2 rounded font-semibold text-xs hover:bg-primary/20 transition"
         >
           Detalles
         </button>
-        <a href="/contact" className="bg-primary text-white px-4 py-2 rounded font-semibold text-xs hover:bg-primary/80 transition">Contactar</a>
+        <a href="/contacto" className="bg-primary text-white px-4 py-2 rounded font-semibold text-xs hover:bg-primary/80 transition">Contactar</a>
       </div>
     </div>
   )

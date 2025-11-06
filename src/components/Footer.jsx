@@ -13,10 +13,10 @@ function Footer(){
       {/* Elemento decorativo moderno */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#981d97] to-[#2e092d]"></div>
       
-      <div className="max-w-7xl mx-auto px-6 py-20 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20 relative">
         
         {/* Grid principal moderno */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mb-10 md:mb-16">
 
           {/* Brand Section */}
           <div>
@@ -44,7 +44,7 @@ function Footer(){
           </div>
 
           {/* Enlaces rápidos y Contacto combinados */}
-          <div className="pl-28">
+          <div className="lg:pl-28">
             <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">Navegación</h4>
             <div className="space-y-3">
               {['Inicio', 'Propiedades', 'Nosotros', 'Servicios', 'Contacto'].map((item) => (
@@ -65,14 +65,12 @@ function Footer(){
             <div className="flex gap-3 mb-6">
               {[
                 { icon: <FaFacebookF className="w-4 h-4" />, env: 'VITE_FACEBOOK_URL' },
-                { icon: <FaInstagram className="w-4 h-4" />, env: 'VITE_INSTAGRAM_URL' },
-                { icon: <FaLinkedinIn className="w-4 h-4" />, env: 'VITE_LINKEDIN_URL' },
-                { icon: <FaWhatsapp className="w-4 h-4" />, env: 'VITE_WHATSAPP_URL' }
+                { icon: <FaInstagram className="w-4 h-4" />, env: 'VITE_INSTAGRAM_URL' }
               ].map((social, index) => (
-                <a 
+                <a
                   key={index}
-                  href={import.meta.env[social.env]} 
-                  target="_blank" 
+                  href={import.meta.env[social.env]}
+                  target="_blank"
                   rel="noopener"
                   className="bg-white/5 hover:bg-[#981d97] border border-white/10 hover:border-[#981d97] p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:rotate-3"
                 >

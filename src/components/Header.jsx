@@ -10,9 +10,9 @@ function Header(){
     if (path === '/') {
       return location.pathname === '/'
     }
-    // Para /properties, también marcar como activo si estamos en /properties/:id
-    if (path === '/properties') {
-      return location.pathname.startsWith('/properties')
+    // Para /propiedades, también marcar como activo si estamos en /propiedades/:id
+    if (path === '/propiedades') {
+      return location.pathname.startsWith('/propiedades')
     }
     return location.pathname === path
   }
@@ -48,10 +48,10 @@ function Header(){
 
         <nav className={`${open ? 'flex' : 'hidden'} md:flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-4 w-full md:w-auto mt-4 md:mt-0 bg-secondary/95 md:bg-transparent p-4 md:p-0 rounded-lg md:rounded-none`}>
           <Link to="/" className={getLinkClasses('/')}>Inicio</Link>
-          <Link to="/properties" className={getLinkClasses('/properties')}>Propiedades</Link>
+          <Link to="/propiedades" className={getLinkClasses('/propiedades')}>Propiedades</Link>
           <Link to="/nosotros" className={getLinkClasses('/nosotros')}>Nosotros</Link>
           <Link to="/servicios" className={getLinkClasses('/servicios')}>Servicios</Link>
-          <Link to="/contact" className={getLinkClasses('/contact')}>Contáctanos</Link>
+          <Link to="/contacto" className={getLinkClasses('/contacto')}>Contáctanos</Link>
         </nav>
       </div>
     </header>

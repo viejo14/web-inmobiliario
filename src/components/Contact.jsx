@@ -65,83 +65,90 @@ function Contact() {
   };
 
   return (
-    <div className="bg-white/90 relative w-full pt-24">
+    <div className="bg-white/90 relative w-full min-h-screen pt-24 pb-12">
       {/* Elementos decorativos */}
       <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-[#981d97] opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-[#981d97] opacity-5 rounded-full translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
-      <section id="contact" className="relative max-w-6xl mx-auto px-4 py-12 overflow-hidden">
+      <section id="contact" className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Contenido principal */}
-        <h3 className="text-2xl font-bold text-primary mb-4">Contacto</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-secondary">
-          <div>
-            <p className="mb-1">
+        <h3 className="text-2xl md:text-3xl font-bold text-primary mb-6 md:mb-8">Contacto</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-secondary">
+          <div className="space-y-4">
+            <p className="text-sm md:text-base">
               <strong>Contacto:</strong> Bien de Raíz Propiedades
             </p>
-            <p className="mb-1">
+            <p className="text-sm md:text-base">
               <strong>Empresa:</strong> BDR Gestión Inmobiliaria SpA
             </p>
-            <p className="mb-1">
-              <strong>Teléfonos:</strong> 
-              <a href="tel:+56232687386" className="hover:underline">+56 2 3268 7386</a> / 
+            <p className="text-sm md:text-base">
+              <strong>Teléfonos:</strong>
+              <a href="tel:+56232687386" className="hover:underline ml-1">+56 2 3268 7386</a>
+              <span className="mx-1">/</span>
               <a href="tel:+56988985592" className="hover:underline">+56 9 8898 5592</a>
             </p>
-            <p className="mb-1">
-              <strong>Correo:</strong> 
-              <a href="mailto:contacto@bienderaiz.cl" className="hover:underline">contacto@bienderaiz.cl</a>
+            <p className="text-sm md:text-base">
+              <strong>Correo:</strong>
+              <a href="mailto:contacto@bienderaiz.cl" className="hover:underline ml-1 break-all">contacto@bienderaiz.cl</a>
             </p>
           </div>
           <div>
-            <form className="space-y-3" onSubmit={handleSubmit}>
-              <label className="sr-only" htmlFor="contact-name">
-                Nombre
-              </label>
-              <input
-                id="contact-name"
-                name="name"
-                aria-label="Nombre"
-                required
-                type="text"
-                className="w-full px-3 py-2 bg-secondary/20 rounded-md text-secondary"
-                placeholder="Tu nombre"
-                value={formData.name}
-                onChange={handleChange}
-                disabled={isSending}
-              />
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div>
+                <label className="sr-only" htmlFor="contact-name">
+                  Nombre
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  aria-label="Nombre"
+                  required
+                  type="text"
+                  className="w-full px-4 py-3 bg-secondary/20 rounded-md text-secondary text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="Tu nombre"
+                  value={formData.name}
+                  onChange={handleChange}
+                  disabled={isSending}
+                />
+              </div>
 
-              <label className="sr-only" htmlFor="contact-email">
-                Email
-              </label>
-              <input
-                id="contact-email"
-                name="email"
-                aria-label="Email"
-                required
-                type="email"
-                className="w-full px-3 py-2 bg-secondary/20 rounded-md text-secondary"
-                placeholder="Tu email"
-                value={formData.email}
-                onChange={handleChange}
-                disabled={isSending}
-              />
+              <div>
+                <label className="sr-only" htmlFor="contact-email">
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  aria-label="Email"
+                  required
+                  type="email"
+                  className="w-full px-4 py-3 bg-secondary/20 rounded-md text-secondary text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="Tu email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={isSending}
+                />
+              </div>
 
-              <label className="sr-only" htmlFor="contact-message">
-                Mensaje
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                aria-label="Mensaje"
-                required
-                className="w-full px-3 py-2 bg-secondary/20 rounded-md text-secondary"
-                rows="4"
-                placeholder="Mensaje"
-                value={formData.message}
-                onChange={handleChange}
-                disabled={isSending}
-              ></textarea>
+              <div>
+                <label className="sr-only" htmlFor="contact-message">
+                  Mensaje
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  aria-label="Mensaje"
+                  required
+                  className="w-full px-4 py-3 bg-secondary/20 rounded-md text-secondary text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
+                  rows="5"
+                  placeholder="Mensaje"
+                  value={formData.message}
+                  onChange={handleChange}
+                  disabled={isSending}
+                ></textarea>
+              </div>
 
               {status.message && (
-                <p className={`text-sm ${status.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                <p className={`text-sm md:text-base ${status.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
                   {status.message}
                 </p>
               )}
@@ -149,7 +156,7 @@ function Contact() {
               <div className="flex justify-start">
                 <button
                   type="submit"
-                  className="bg-primary px-4 py-2 rounded-md text-white w-full md:w-auto disabled:bg-primary/60"
+                  className="bg-primary px-6 py-3 rounded-md text-white w-full md:w-auto disabled:bg-primary/60 font-semibold hover:bg-primary/90 transition-colors text-sm md:text-base"
                   disabled={isSending}
                 >
                   {isSending ? 'Enviando...' : 'Enviar'}

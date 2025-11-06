@@ -24,13 +24,17 @@ function PropertyDetail() {
       } catch (err) {
         console.error('Error al cargar propiedad:', err);
         setError('No se pudo cargar la propiedad. Por favor, intenta nuevamente.');
+        // Redirigir a 404 después de 2 segundos si hay un error
+        setTimeout(() => {
+          navigate('/404', { replace: true });
+        }, 2000);
       } finally {
         setLoading(false);
       }
     };
 
     loadProperty();
-  }, [id]);
+  }, [id, navigate]);
 
   const nextImage = () => {
     if (property?.images) {
@@ -96,7 +100,7 @@ function PropertyDetail() {
         <div className="text-center">
           <div className="text-red-600 text-xl mb-4">{error || 'Propiedad no encontrada'}</div>
           <button
-            onClick={() => navigate('/properties')}
+            onClick={() => navigate('/propiedades')}
             className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/80"
           >
             Volver a propiedades
@@ -111,7 +115,7 @@ function PropertyDetail() {
       <section className="max-w-7xl mx-auto px-4 py-10">
         {/* Botón volver */}
         <button
-          onClick={() => navigate('/properties')}
+          onClick={() => navigate('/propiedades')}
           className="flex items-center gap-2 text-primary hover:text-primary/80 mb-6 font-semibold"
         >
           <FaArrowLeft /> Volver a propiedades
@@ -282,7 +286,7 @@ function PropertyDetail() {
                 Contáctanos para más información o para agendar una visita.
               </p>
               <a
-                href="/contact"
+                href="/contacto"
                 className="block w-full bg-primary text-white text-center px-6 py-3 rounded-md font-semibold hover:bg-primary/80 transition mb-3"
               >
                 Contactar

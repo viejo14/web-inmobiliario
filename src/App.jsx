@@ -10,7 +10,8 @@ import Nosotros from './pages/Nosotros';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Properties from './pages/Properties';
 import PropertyDetail from './pages/PropertyDetail';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+import NotFound from './pages/NotFound'
 
 function App(){
   const [loading, setLoading] = React.useState(true);
@@ -34,12 +35,14 @@ function App(){
         <div className="flex-1 flex flex-col w-full">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/properties" element={<Properties />} />
-            <Route path="/properties/:id" element={<PropertyDetail />} />
+            <Route path="/propiedades" element={<Properties />} />
+            <Route path="/propiedades/:id" element={<PropertyDetail />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/servicios" element={<Servicios />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contacto" element={<Contact />} />
             <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />
