@@ -22,9 +22,9 @@ function Footer(){
           <div>
             <div className="flex items-start gap-4 mb-6">
               <div className="relative">
-                <img 
-                  src="img/logo_gonzalo.png" 
-                  alt="BDR Gestión Inmobiliaria" 
+                <img
+                  src="/img/logo_gonzalo.png"
+                  alt="BDR Gestión Inmobiliaria"
                   className="w-24 h-24 object-contain rounded-2xl"
                 />
                 <div className="absolute inset-0 border border-white/10 rounded-xl"></div>
@@ -124,10 +124,18 @@ function Footer(){
             <div className="text-white/30 text-sm font-light">
               © {new Date().getFullYear()} BDR Gestión Inmobiliaria SpA. Todos los derechos reservados.
             </div>
-            <div className="flex gap-8 text-white/40 text-sm">
-              <a href="/politica-privacidad" className="hover:text-white transition-colors duration-300 font-light">
-                Privacidad
-              </a>
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="flex items-center gap-2">
+                <span className="text-white/40 text-sm font-light">Desarrollado por</span>
+                          <img src="/img/logo-footer/logo-procanje.jpeg" alt="Logo BIDATA" className="w-20 h-20 object-contain rounded-lg" />
+                <span className="text-white/40 text-lg font-bold mx-1">+</span>
+                <img src="/img/logo-footer/logo-dark-full.png" alt="Logo BIDATA Dark" className="w-20 h-20 object-contain rounded" />
+              </div>
+              <div className="flex gap-8 text-white/40 text-sm">
+                <a href="/politica-privacidad" className="hover:text-white transition-colors duration-300 font-light">
+                  Privacidad
+                </a>
+              </div>
             </div>
           </div>
         </div>

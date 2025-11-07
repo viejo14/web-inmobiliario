@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPropertyById } from '../services/propertiesService';
-import { FaBed, FaBath, FaCar, FaRulerCombined, FaArrowLeft, FaChevronLeft, FaChevronRight, FaSearchPlus } from 'react-icons/fa';
+import { FaBed, FaBath, FaCar, FaRulerCombined, FaArrowLeft, FaChevronLeft, FaChevronRight, FaSearchPlus, FaHome } from 'react-icons/fa';
 import ImageLightbox from '../components/ImageLightbox';
 
 function PropertyDetail() {
@@ -13,6 +13,7 @@ function PropertyDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const loadProperty = async () => {
@@ -54,10 +55,10 @@ function PropertyDetail() {
 
   const getCurrentImage = () => {
     if (!property?.images || property.images.length === 0) {
-      return '/img/logo/logo-dark-full.png';
+      return null;
     }
     const image = property.images[currentImageIndex];
-    return image?.path || image?.url || '/img/logo/logo-dark-full.png';
+    return image?.path || image?.url || null;
   };
 
   // Funciones para el lightbox
@@ -122,69 +123,83 @@ function PropertyDetail() {
         </button>
 
         {/* Carrusel de imágenes */}
-        <div className="relative bg-black rounded-xl overflow-hidden mb-8 group cursor-pointer" style={{ height: '500px' }}>
-          <img
-            src={getCurrentImage()}
-            alt={property.propertyTitle}
-            className="w-full h-full object-contain"
-            onClick={() => openLightbox(currentImageIndex)}
-            onError={(e) => {
-              e.target.src = '/img/logo/logo-dark-full.png';
-            }}
-          />
-
-          {/* Botón de ampliar con lupa */}
-          <button
-            onClick={() => openLightbox(currentImageIndex)}
-            className="absolute top-4 right-4 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition opacity-0 group-hover:opacity-100"
-            aria-label="Ampliar imagen"
-          >
-            <FaSearchPlus className="text-primary text-xl" />
-          </button>
-
-          {/* Controles del carrusel */}
-          {property.images && property.images.length > 1 && (
+        <div className="relative bg-black rounded-xl overflow-hidden mb-8 group" style={{ height: '500px' }}>
+          {/* Mostrar placeholder si no hay imágenes o hay error */}
+          {(!property.images || property.images.length === 0 || imageError) ? (
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center">
+              <FaHome className="text-gray-400 text-9xl mb-4" />
+              <span className="text-gray-500 text-2xl font-medium">Sin imágenes disponibles</span>
+            </div>
+          ) : (
             <>
+              <img
+                src={getCurrentImage()}
+                alt={property.propertyTitle}
+                className="w-full h-full object-contain cursor-pointer"
+                onClick={() => openLightbox(currentImageIndex)}
+                onError={() => setImageError(true)}
+              />
+
+              {/* Botón de ampliar con lupa */}
               <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition"
+                onClick={() => openLightbox(currentImageIndex)}
+                className="absolute top-4 right-4 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition opacity-0 group-hover:opacity-100"
+                aria-label="Ampliar imagen"
               >
-                <FaChevronLeft className="text-primary text-xl" />
-              </button>
-              <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition"
-              >
-                <FaChevronRight className="text-primary text-xl" />
+                <FaSearchPlus className="text-primary text-xl" />
               </button>
 
-              {/* Indicador de imagen */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
-                {currentImageIndex + 1} / {property.images.length}
-              </div>
+              {/* Controles del carrusel */}
+              {property.images.length > 1 && (
+                <>
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition"
+                  >
+                    <FaChevronLeft className="text-primary text-xl" />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition"
+                  >
+                    <FaChevronRight className="text-primary text-xl" />
+                  </button>
+
+                  {/* Indicador de imagen */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
+                    {currentImageIndex + 1} / {property.images.length}
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>
 
         {/* Miniaturas */}
-        {property.images && property.images.length > 1 && (
+        {property.images && property.images.length > 1 && !imageError && (
           <div className="flex gap-2 overflow-x-auto pb-4 mb-8">
             {property.images.map((image, index) => (
               <button
                 key={image.id || index}
-                onClick={() => setCurrentImageIndex(index)}
+                onClick={() => {
+                  setCurrentImageIndex(index);
+                  setImageError(false); // Reset error cuando se cambia de imagen
+                }}
                 className={`flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 transition ${
                   currentImageIndex === index ? 'border-primary' : 'border-gray-300'
                 }`}
               >
-                <img
-                  src={image.path || image.url || '/img/logo/logo-dark-full.png'}
-                  alt={`Vista ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.src = '/img/logo/logo-dark-full.png';
-                  }}
-                />
+                {image.path || image.url ? (
+                  <img
+                    src={image.path || image.url}
+                    alt={`Vista ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <FaHome className="text-gray-400 text-2xl" />
+                  </div>
+                )}
               </button>
             ))}
           </div>
@@ -247,12 +262,16 @@ function PropertyDetail() {
                     </div>
                   </div>
                 )}
-                {property.characteristics?.numberOfParkingSpaces && (
+                {(property.characteristics?.numberOfParkingSpaces || property.characteristics?.hasParking || property.characteristics?.hasGarage) && (
                   <div className="flex items-center gap-2">
                     <FaCar className="text-primary text-2xl" />
                     <div>
-                      <div className="font-semibold">{property.characteristics.numberOfParkingSpaces}</div>
-                      <div className="text-sm text-gray-600">Estacionamientos</div>
+                      <div className="font-semibold">
+                        {property.characteristics?.numberOfParkingSpaces || (property.characteristics?.hasGarage ? 'Sí' : 'Sí')}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {property.characteristics?.hasGarage ? 'Garage' : 'Estacionamiento'}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -262,6 +281,15 @@ function PropertyDetail() {
                     <div>
                       <div className="font-semibold">{property.characteristics.surface} m²</div>
                       <div className="text-sm text-gray-600">Superficie útil</div>
+                    </div>
+                  </div>
+                )}
+                {property.characteristics?.constructedSurface && (
+                  <div className="flex items-center gap-2">
+                    <FaRulerCombined className="text-primary text-2xl" />
+                    <div>
+                      <div className="font-semibold">{property.characteristics.constructedSurface} m²</div>
+                      <div className="text-sm text-gray-600">Superficie construida</div>
                     </div>
                   </div>
                 )}

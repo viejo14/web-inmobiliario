@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { FaBed, FaBath, FaCar, FaRulerCombined } from 'react-icons/fa';
+import { FaBed, FaBath, FaCar, FaRulerCombined, FaHome } from 'react-icons/fa';
 
 // Función para limpiar HTML tags y limitar el largo de un string
 function truncateText(text, maxLength) {
@@ -12,6 +12,7 @@ function truncateText(text, maxLength) {
 
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
 
   // Función para obtener la primera imagen disponible
   const getPropertyImage = () => {
@@ -47,20 +48,28 @@ const PropertyCard = ({ property }) => {
       return typeof property.mainImage === 'string' ? property.mainImage : property.mainImage.url;
     }
 
-    // Imagen por defecto
-    return '/img/logo/logo-dark-full.png';
+    // No hay imagen disponible
+    return null;
   };
+
+  const propertyImage = getPropertyImage();
 
   return (
   <div className="bg-white rounded-xl shadow-lg border border-primary/20 p-4 flex flex-col items-center hover:shadow-2xl transition-shadow duration-200 h-full min-h-[34rem]">
-      <img
-        src={getPropertyImage()}
-        alt={property.propertyTitle}
-        className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-200"
-        onError={(e) => {
-          e.target.src = '/img/logo/logo-dark-full.png';
-        }}
-      />
+      {/* Imagen o Placeholder */}
+      {propertyImage && !imageError ? (
+        <img
+          src={propertyImage}
+          alt={property.propertyTitle}
+          className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-200"
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        <div className="w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-4 border border-gray-300 flex flex-col items-center justify-center">
+          <FaHome className="text-gray-400 text-5xl mb-2" />
+          <span className="text-gray-500 text-sm font-medium">Sin imagen disponible</span>
+        </div>
+      )}
       {/* Etiquetas tipo de propiedad y operación */}
       <div className="flex gap-2 mb-2 w-full justify-start">
         <span className="bg-primary/80 text-white text-xs px-3 py-1 rounded-full font-semibold">{property.typeOfPropertyId}</span>
@@ -81,7 +90,7 @@ const PropertyCard = ({ property }) => {
       {/* Características principales según tipo de inmueble */}
       <div className="flex flex-wrap gap-4 justify-center mb-2">
         {/* Casa y Departamento */}
-        {(property.typeOfPropertyId === 'Casa' || property.typeOfPropertyId === 'Departamento') && (
+        {(property.typeOfPropertyId?.includes('Casa') || property.typeOfPropertyId?.includes('Departamento')) && (
           <>
             {property.characteristics?.bedrooms && (
               <span className="bg-gray-100 px-3 py-1 rounded text-xs flex items-center">
@@ -95,10 +104,12 @@ const PropertyCard = ({ property }) => {
                 {property.characteristics.bathrooms} Baños
               </span>
             )}
-            {property.characteristics?.numberOfParkingSpaces && (
+            {(property.characteristics?.numberOfParkingSpaces || property.characteristics?.hasParking || property.characteristics?.hasGarage) && (
               <span className="bg-gray-100 px-3 py-1 rounded text-xs flex items-center">
                 <FaCar className="h-4 w-4 mr-1 text-primary" />
-                {property.characteristics.numberOfParkingSpaces} Estac.
+                {property.characteristics?.numberOfParkingSpaces
+                  ? `${property.characteristics.numberOfParkingSpaces} Estac.`
+                  : property.characteristics?.hasGarage ? 'Garage' : 'Estacionamiento'}
               </span>
             )}
             {property.characteristics?.surface && (
@@ -116,7 +127,7 @@ const PropertyCard = ({ property }) => {
           </>
         )}
         {/* Oficina */}
-        {property.typeOfPropertyId === 'Oficina' && (
+        {property.typeOfPropertyId?.includes('Oficina') && (
           <>
             {property.characteristics?.surface && (
               <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
@@ -137,16 +148,18 @@ const PropertyCard = ({ property }) => {
                 {property.characteristics.bathrooms} Baños
               </span>
             )}
-            {property.characteristics?.numberOfParkingSpaces && (
+            {(property.characteristics?.numberOfParkingSpaces || property.characteristics?.hasParking || property.characteristics?.hasGarage) && (
               <span className="bg-gray-100 px-3 py-1 rounded text-xs flex items-center">
                 <FaCar className="h-4 w-4 mr-1 text-primary" />
-                {property.characteristics.numberOfParkingSpaces} Estac.
+                {property.characteristics?.numberOfParkingSpaces
+                  ? `${property.characteristics.numberOfParkingSpaces} Estac.`
+                  : property.characteristics?.hasGarage ? 'Garage' : 'Estacionamiento'}
               </span>
             )}
           </>
         )}
         {/* Local comercial, Bodega */}
-        {(property.typeOfPropertyId === 'Local comercial' || property.typeOfPropertyId === 'Bodega') && (
+        {(property.typeOfPropertyId?.includes('Local') || property.typeOfPropertyId?.includes('Bodega')) && (
           <>
             {property.characteristics?.surface && (
               <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
@@ -166,16 +179,18 @@ const PropertyCard = ({ property }) => {
                 {property.characteristics.bathrooms} Baños
               </span>
             )}
-            {property.characteristics?.numberOfParkingSpaces && (
+            {(property.characteristics?.numberOfParkingSpaces || property.characteristics?.hasParking || property.characteristics?.hasGarage) && (
               <span className="bg-gray-100 px-3 py-1 rounded text-xs flex items-center">
                 <FaCar className="h-4 w-4 mr-1 text-primary" />
-                {property.characteristics.numberOfParkingSpaces} Estac.
+                {property.characteristics?.numberOfParkingSpaces
+                  ? `${property.characteristics.numberOfParkingSpaces} Estac.`
+                  : property.characteristics?.hasGarage ? 'Garage' : 'Estacionamiento'}
               </span>
             )}
           </>
         )}
         {/* Parcela, Terreno */}
-        {(property.typeOfPropertyId === 'Parcela' || property.typeOfPropertyId === 'Terreno') && (
+        {(property.typeOfPropertyId?.includes('Parcela') || property.typeOfPropertyId?.includes('Terreno')) && (
           <>
             {property.characteristics?.surface && (
               <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
@@ -187,6 +202,31 @@ const PropertyCard = ({ property }) => {
               <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
                 <FaRulerCombined className="h-4 w-4 mr-1 text-primary" />
                 {property.characteristics.constructedSurface} m² construidos
+              </span>
+            )}
+          </>
+        )}
+        {/* Estacionamiento */}
+        {property.typeOfPropertyId?.includes('Estacionamiento') && (
+          <>
+            {property.characteristics?.surface && (
+              <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
+                <FaRulerCombined className="h-4 w-4 mr-1 text-primary" />
+                {property.characteristics.surface} m²
+              </span>
+            )}
+            {property.characteristics?.constructedSurface && (
+              <span className="bg-primary/10 px-3 py-1 rounded text-xs flex items-center">
+                <FaRulerCombined className="h-4 w-4 mr-1 text-primary" />
+                {property.characteristics.constructedSurface} m² construidos
+              </span>
+            )}
+            {(property.characteristics?.numberOfParkingSpaces || property.characteristics?.hasParking || property.characteristics?.hasGarage) && (
+              <span className="bg-gray-100 px-3 py-1 rounded text-xs flex items-center">
+                <FaCar className="h-4 w-4 mr-1 text-primary" />
+                {property.characteristics?.numberOfParkingSpaces
+                  ? `${property.characteristics.numberOfParkingSpaces} espacios`
+                  : property.characteristics?.hasGarage ? 'Garage' : 'Estacionamiento'}
               </span>
             )}
           </>

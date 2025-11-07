@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProperties } from '../services/propertiesService';
 import PropertiesList from './components/properties/PropertiesList';
+import Pagination from '../components/Pagination';
 import imgProperties from '../../public/img/img-carrusel-hero/casa-en-l-madrid-iluminacion-led-porches.jpg';
 
 function Properties() {
@@ -9,12 +10,18 @@ function Properties() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Estados para paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalProperties, setTotalProperties] = useState(0);
+  const [propertiesPerPage] = useState(6);
+
   // Estados para los filtros
   const [filters, setFilters] = useState({
     typeOfOperation: '',
     typeOfProperty: '',
-    region: '',
-    city: '',
+    stateId: '',
+    cityId: '',
     bedrooms: '',
     bathrooms: '',
     minSurface: '',
@@ -26,9 +33,11 @@ function Properties() {
       try {
         setLoading(true);
         setError(null);
-        const data = await fetchProperties();
-        setProperties(data);
-        setFilteredProperties(data);
+        const response = await fetchProperties({}, currentPage, propertiesPerPage);
+        setProperties(response.properties);
+        setFilteredProperties(response.properties);
+        setTotalPages(response.totalPages);
+        setTotalProperties(response.total);
       } catch (err) {
         console.error('Error al cargar propiedades:', err);
         setError('No se pudieron cargar las propiedades. Por favor, intenta nuevamente.');
@@ -38,7 +47,9 @@ function Properties() {
     };
 
     loadProperties();
-  }, []);
+    // Scroll al inicio cuando cambia la página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage, propertiesPerPage]);
 
   // Función para manejar cambios en los filtros
   const handleFilterChange = (filterName, value) => {
@@ -49,8 +60,8 @@ function Properties() {
       };
 
       // Si se cambia la región, limpiar el filtro de ciudad
-      if (filterName === 'region') {
-        newFilters.city = '';
+      if (filterName === 'stateId') {
+        newFilters.cityId = '';
       }
 
       return newFilters;
@@ -58,81 +69,72 @@ function Properties() {
   };
 
   // Función para aplicar los filtros
-  const applyFilters = () => {
-    let filtered = [...properties];
+  const applyFilters = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      setCurrentPage(1); // Resetear a la primera página
 
-    // Filtrar por tipo de operación
-    if (filters.typeOfOperation) {
-      filtered = filtered.filter(prop =>
-        prop.typeOfOperationId?.toLowerCase() === filters.typeOfOperation.toLowerCase()
-      );
+      const response = await fetchProperties(filters, 1, propertiesPerPage);
+      setFilteredProperties(response.properties);
+      setTotalPages(response.totalPages);
+      setTotalProperties(response.total);
+    } catch (err) {
+      console.error('Error al aplicar filtros:', err);
+      setError('Error al aplicar los filtros. Por favor, intenta nuevamente.');
+    } finally {
+      setLoading(false);
     }
+  };
 
-    // Filtrar por tipo de propiedad
-    if (filters.typeOfProperty) {
-      filtered = filtered.filter(prop =>
-        prop.typeOfPropertyId?.toLowerCase() === filters.typeOfProperty.toLowerCase()
-      );
+  // Funciones para navegación de páginas
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
     }
+  };
 
-    // Filtrar por región
-    if (filters.region) {
-      filtered = filtered.filter(prop =>
-        prop.address?.state?.name?.toLowerCase().includes(filters.region.toLowerCase())
-      );
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
+  };
 
-    // Filtrar por ciudad/comuna
-    if (filters.city) {
-      filtered = filtered.filter(prop =>
-        prop.address?.city?.name?.toLowerCase().includes(filters.city.toLowerCase())
-      );
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
-
-    // Filtrar por dormitorios
-    if (filters.bedrooms) {
-      filtered = filtered.filter(prop =>
-        prop.characteristics?.bedrooms >= parseInt(filters.bedrooms)
-      );
-    }
-
-    // Filtrar por baños
-    if (filters.bathrooms) {
-      filtered = filtered.filter(prop =>
-        prop.characteristics?.bathrooms >= parseInt(filters.bathrooms)
-      );
-    }
-
-    // Filtrar por superficie mínima
-    if (filters.minSurface) {
-      filtered = filtered.filter(prop =>
-        prop.characteristics?.surface >= parseInt(filters.minSurface)
-      );
-    }
-
-    // Filtrar por estacionamientos
-    if (filters.parkingSpaces) {
-      filtered = filtered.filter(prop =>
-        prop.characteristics?.numberOfParkingSpaces >= parseInt(filters.parkingSpaces)
-      );
-    }
-
-    setFilteredProperties(filtered);
   };
 
   // Función para limpiar los filtros
-  const clearFilters = () => {
+  const clearFilters = async () => {
     setFilters({
       typeOfOperation: '',
       typeOfProperty: '',
-      region: '',
-      city: '',
+      stateId: '',
+      cityId: '',
       bedrooms: '',
       bathrooms: '',
       minSurface: '',
       parkingSpaces: ''
     });
-    setFilteredProperties(properties);
+
+    try {
+      setLoading(true);
+      setError(null);
+      setCurrentPage(1);
+
+      const response = await fetchProperties({}, 1, propertiesPerPage);
+      setFilteredProperties(response.properties);
+      setProperties(response.properties);
+      setTotalPages(response.totalPages);
+      setTotalProperties(response.total);
+    } catch (err) {
+      console.error('Error al limpiar filtros:', err);
+      setError('Error al cargar las propiedades. Por favor, intenta nuevamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Obtener valores únicos para los selects
@@ -147,22 +149,37 @@ function Properties() {
   };
 
   const getUniqueRegions = () => {
-    const regions = properties.map(p => p.address?.state?.name).filter(Boolean);
-    return [...new Set(regions)];
+    const regionsMap = new Map();
+    properties.forEach(p => {
+      if (p.address?.state?.id && p.address?.state?.name) {
+        regionsMap.set(p.address.state.id, p.address.state.name);
+      }
+    });
+    return Array.from(regionsMap, ([id, name]) => ({ id, name }));
   };
 
   const getUniqueCities = () => {
+    const citiesMap = new Map();
+
     // Si hay una región seleccionada, filtrar ciudades solo de esa región
-    if (filters.region) {
-      const cities = properties
-        .filter(p => p.address?.state?.name === filters.region)
-        .map(p => p.address?.city?.name)
-        .filter(Boolean);
-      return [...new Set(cities)];
+    if (filters.stateId) {
+      properties
+        .filter(p => p.address?.state?.id == filters.stateId)
+        .forEach(p => {
+          if (p.address?.city?.id && p.address?.city?.name) {
+            citiesMap.set(p.address.city.id, p.address.city.name);
+          }
+        });
+    } else {
+      // Si no hay región seleccionada, mostrar todas las ciudades
+      properties.forEach(p => {
+        if (p.address?.city?.id && p.address?.city?.name) {
+          citiesMap.set(p.address.city.id, p.address.city.name);
+        }
+      });
     }
-    // Si no hay región seleccionada, mostrar todas las ciudades
-    const cities = properties.map(p => p.address?.city?.name).filter(Boolean);
-    return [...new Set(cities)];
+
+    return Array.from(citiesMap, ([id, name]) => ({ id, name }));
   };
 
   return (
@@ -213,24 +230,24 @@ function Properties() {
             {/* Región */}
             <select
               className="border rounded-md px-3 py-2 w-full"
-              value={filters.region}
-              onChange={(e) => handleFilterChange('region', e.target.value)}
+              value={filters.stateId}
+              onChange={(e) => handleFilterChange('stateId', e.target.value)}
             >
               <option value="">Región</option>
               {getUniqueRegions().map(region => (
-                <option key={region} value={region}>{region}</option>
+                <option key={region.id} value={region.id}>{region.name}</option>
               ))}
             </select>
 
             {/* Ciudad/Comuna */}
             <select
               className="border rounded-md px-3 py-2 w-full"
-              value={filters.city}
-              onChange={(e) => handleFilterChange('city', e.target.value)}
+              value={filters.cityId}
+              onChange={(e) => handleFilterChange('cityId', e.target.value)}
             >
               <option value="">Comuna</option>
               {getUniqueCities().map(city => (
-                <option key={city} value={city}>{city}</option>
+                <option key={city.id} value={city.id}>{city.name}</option>
               ))}
             </select>
           </div>
@@ -243,11 +260,11 @@ function Properties() {
               onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
             >
               <option value="">Dormitorios</option>
-              <option value="1">1+</option>
-              <option value="2">2+</option>
-              <option value="3">3+</option>
-              <option value="4">4+</option>
-              <option value="5">5+</option>
+              <option value="1">1 dormitorio</option>
+              <option value="2">2 dormitorios</option>
+              <option value="3">3 dormitorios</option>
+              <option value="4">4 dormitorios</option>
+              <option value="5">5 dormitorios</option>
             </select>
 
             {/* Baños */}
@@ -257,10 +274,10 @@ function Properties() {
               onChange={(e) => handleFilterChange('bathrooms', e.target.value)}
             >
               <option value="">Baños</option>
-              <option value="1">1+</option>
-              <option value="2">2+</option>
-              <option value="3">3+</option>
-              <option value="4">4+</option>
+              <option value="1">1 o más baños</option>
+              <option value="2">2 o más baños</option>
+              <option value="3">3 o más baños</option>
+              <option value="4">4 o más baños</option>
             </select>
 
             {/* Superficie mínima */}
@@ -279,10 +296,10 @@ function Properties() {
               onChange={(e) => handleFilterChange('parkingSpaces', e.target.value)}
             >
               <option value="">Estacionamiento</option>
-              <option value="1">1+</option>
-              <option value="2">2+</option>
-              <option value="3">3+</option>
-              <option value="4">4+</option>
+              <option value="1">1 estacionamiento</option>
+              <option value="2">2 estacionamientos</option>
+              <option value="3">3 estacionamientos</option>
+              <option value="4">4 estacionamientos</option>
             </select>
           </div>
 
@@ -313,15 +330,30 @@ function Properties() {
               <div className="text-red-600 text-lg">{error}</div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProperties.length === 0 ? (
-                <div className="col-span-3 text-secondary text-center py-12">
-                  No se encontraron propiedades con los filtros seleccionados.
-                </div>
-              ) : (
-                <PropertiesList properties={filteredProperties} />
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredProperties.length === 0 ? (
+                  <div className="col-span-3 text-secondary text-center py-12">
+                    No se encontraron propiedades con los filtros seleccionados.
+                  </div>
+                ) : (
+                  <PropertiesList properties={filteredProperties} />
+                )}
+              </div>
+
+              {/* Componente de paginación */}
+              {filteredProperties.length > 0 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  totalItems={totalProperties}
+                  itemsPerPage={propertiesPerPage}
+                  onPageChange={handlePageChange}
+                  onPreviousPage={handlePreviousPage}
+                  onNextPage={handleNextPage}
+                />
               )}
-            </div>
+            </>
           )}
         </section>
       </section>
