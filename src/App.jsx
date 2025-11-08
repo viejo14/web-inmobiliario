@@ -1,16 +1,16 @@
 
 import React from 'react';
-import Header from './components/Header'
-import Loader from './components/Loader';
+import Header from './components/layout/Header'
+import Loader from './components/ui/Loader';
 import PoliticaPrivacidad from './pages/PoliticaPrivacidad';
-import Contact from './components/Contact';
+import Contact from './sections/Contact';
 import Home from './pages/Home';
 import Servicios from './pages/Servicios';
 import Nosotros from './pages/Nosotros';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Properties from './pages/Properties';
 import PropertyDetail from './pages/PropertyDetail';
-import Footer from './components/Footer';
+import Footer from './components/layout/Footer';
 import NotFound from './pages/NotFound'
 
 function App(){

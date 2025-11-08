@@ -1,7 +1,5 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
-import imgNosotros from '../../public/img/img-header/Diseno_targ_present.png';
-//../../public/img/img-header/Diseno_targ_present.png
 
 function Nosotros() {
   return (
@@ -9,7 +7,7 @@ function Nosotros() {
       {/* Imagen decorativa debajo del header */}
       <div className="w-full" style={{marginTop: '0px'}}>
         <img
-          src={imgNosotros}
+          src="/img/img-header/Diseno_targ_present.png"
           alt="Decoración Nosotros"
           className="w-full"
           style={{

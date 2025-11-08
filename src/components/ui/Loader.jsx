@@ -1,5 +1,4 @@
 import React from 'react';
-import gifAnimacion from '../../public/img/animacion_BDR.gif';
 
 export default function Loader({ fadeOut = false }) {
   const [fade, setFade] = React.useState(false);
@@ -26,7 +25,7 @@ export default function Loader({ fadeOut = false }) {
       }}
     >
       <img
-        src={gifAnimacion}
+        src="/img/animacion_BDR.gif"
         alt="Cargando..."
         style={{
           width: '400px',

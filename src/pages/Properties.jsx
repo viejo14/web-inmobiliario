@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProperties } from '../services/propertiesService';
-import PropertiesList from './components/properties/PropertiesList';
-import Pagination from '../components/Pagination';
-import imgProperties from '../../public/img/img-carrusel-hero/casa-en-l-madrid-iluminacion-led-porches.jpg';
+import PropertiesList from '../components/properties/PropertiesList';
+import Pagination from '../components/ui/Pagination';
 
 function Properties() {
   const [properties, setProperties] = useState([]);
@@ -187,7 +186,7 @@ function Properties() {
       {/* Imagen decorativa debajo del header */}
       <div className="w-full" style={{marginTop: '0px'}}>
         <img
-          src={imgProperties}
+          src="/img/img-carrusel-hero/casa-en-l-madrid-iluminacion-led-porches.jpg"
           alt="Decoración Propiedades"
           className="w-full"
           style={{

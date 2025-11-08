@@ -31,10 +31,10 @@ function Footer(){
               </div>
               <div>
                 <h3 className="font-bold text-2xl mb-2 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  BDR
+                  Bien de Raíz
                 </h3>
                 <p className="text-white/40 text-sm font-light">
-                  Bien de Raíz
+                  Propiedades
                 </p>
               </div>
             </div>
@@ -63,20 +63,33 @@ function Footer(){
           <div>
             <h4 className="text-white font-semibold mb-6 text-sm uppercase tracking-wider">Conecta</h4>
             <div className="flex gap-3 mb-6">
-              {[
-                { icon: <FaFacebookF className="w-4 h-4" />, env: 'VITE_FACEBOOK_URL' },
-                { icon: <FaInstagram className="w-4 h-4" />, env: 'VITE_INSTAGRAM_URL' }
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={import.meta.env[social.env]}
-                  target="_blank"
-                  rel="noopener"
-                  className="bg-white/5 hover:bg-[#981d97] border border-white/10 hover:border-[#981d97] p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:rotate-3"
-                >
-                  {social.icon}
-                </a>
-              ))}
+              <a
+                href={import.meta.env.VITE_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener"
+                aria-label="Facebook"
+                className="bg-white/5 hover:bg-[#981d97] border border-white/10 hover:border-[#981d97] p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:rotate-3"
+              >
+                <FaFacebookF className="w-4 h-4" />
+              </a>
+              <a
+                href={import.meta.env.VITE_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+                className="bg-white/5 hover:bg-[#981d97] border border-white/10 hover:border-[#981d97] p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:rotate-3"
+              >
+                <FaInstagram className="w-4 h-4" />
+              </a>
+              <a
+                href={import.meta.env.VITE_LINKEDIN_URL}
+                target="_blank"
+                rel="noopener"
+                aria-label="LinkedIn"
+                className="bg-white/5 hover:bg-[#981d97] border border-white/10 hover:border-[#981d97] p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:rotate-3"
+              >
+                <FaLinkedinIn className="w-4 h-4" />
+              </a>
             </div>
             <div className="bg-white/5 rounded-2xl p-4 border border-white/10 mb-6">
               <p className="text-white/40 text-xs mb-1">Horario atención</p>
@@ -127,9 +140,8 @@ function Footer(){
             <div className="flex flex-col lg:flex-row items-center gap-8">
               <div className="flex items-center gap-2">
                 <span className="text-white/40 text-sm font-light">Desarrollado por</span>
-                          <img src="/img/logo-footer/logo-procanje.jpeg" alt="Logo BIDATA" className="w-20 h-20 object-contain rounded-lg" />
-                <span className="text-white/40 text-lg font-bold mx-1">+</span>
-                <img src="/img/logo-footer/logo-dark-full.png" alt="Logo BIDATA Dark" className="w-20 h-20 object-contain rounded" />
+                  <img src="/img/logo-footer/logo-procanje.jpeg" alt="Logo BIDATA" className="w-20 h-20 object-contain rounded-lg" />
+                  <img src="/img/logo-footer/3.svg" alt="Logo adicional" className="w-20 h-20 object-contain rounded-lg" />
               </div>
               <div className="flex gap-8 text-white/40 text-sm">
                 <a href="/politica-privacidad" className="hover:text-white transition-colors duration-300 font-light">

@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaUserCheck, FaAward, FaRegEye, FaNetworkWired } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Services from '../components/Services';
-import Contact from '../components/Contact';
+import Hero from '../sections/Hero';
+import About from '../sections/About';
+import Services from '../sections/Services';
+import Contact from '../sections/Contact';
 
 function Home() {
   return (
@@ -42,7 +42,7 @@ function Home() {
         <div className="flex flex-wrap justify-center gap-12">
           <a href="/servicios" className="flex flex-col items-center justify-center bg-white/90 rounded-full shadow-lg w-64 h-64 p-8 hover:bg-primary/10 transition">
             <img src="img/Intermediacion-asesoria-inmobiliaria.jpg" alt="Intermediación" className="w-24 h-24 mb-4 rounded-full object-cover" />
-            <div className="font-semibold text-primary text-lg text-center">Intermediación, asesoría y búsqueda de propiedades</div>
+            <div className="font-semibold text-primary text-lg text-center">Intermediación y asesoría</div>
           </a>
           <a href="/servicios" className="flex flex-col items-center justify-center bg-white/90 rounded-full shadow-lg w-64 h-64 p-8 hover:bg-primary/10 transition">
             <img src="img/Compra-venta-arriendo-permuta.jpg" alt="Compra, venta, arriendo y administración" className="w-24 h-24 mb-4 rounded-full object-cover" />

@@ -1,58 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { FaBed, FaBath, FaCar, FaRulerCombined, FaHome } from 'react-icons/fa';
-
-// Función para limpiar HTML tags y limitar el largo de un string
-function truncateText(text, maxLength) {
-  if (!text) return '';
-  // Eliminar todas las etiquetas HTML
-  const cleanText = text.replace(/<[^>]*>/g, '');
-  return cleanText.length > maxLength ? cleanText.slice(0, maxLength) + '...' : cleanText;
-}
+import { truncateText, getPropertyImage } from '../../utils/formatters';
 
 const PropertyCard = ({ property }) => {
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
 
-  // Función para obtener la primera imagen disponible
-  const getPropertyImage = () => {
-    // Si images es un array de objetos con path
-    if (property.images && Array.isArray(property.images) && property.images.length > 0) {
-      const firstImage = property.images[0];
-
-      // Si el elemento es un string directo
-      if (typeof firstImage === 'string') {
-        return firstImage;
-      }
-
-      // Si el elemento es un objeto con path (estructura de Procanje)
-      if (typeof firstImage === 'object' && firstImage.path) {
-        return firstImage.path;
-      }
-
-      // Si el elemento es un objeto, intentar otras propiedades
-      if (typeof firstImage === 'object') {
-        const imageUrl = firstImage.url ||
-                        firstImage.imageUrl ||
-                        firstImage.src ||
-                        firstImage.link;
-
-        if (imageUrl) {
-          return imageUrl;
-        }
-      }
-    }
-
-    // Si tiene una propiedad mainImage
-    if (property.mainImage) {
-      return typeof property.mainImage === 'string' ? property.mainImage : property.mainImage.url;
-    }
-
-    // No hay imagen disponible
-    return null;
-  };
-
-  const propertyImage = getPropertyImage();
+  const propertyImage = getPropertyImage(property);
 
   return (
   <div className="bg-white rounded-xl shadow-lg border border-primary/20 p-4 flex flex-col items-center hover:shadow-2xl transition-shadow duration-200 h-full min-h-[34rem]">
@@ -74,7 +29,7 @@ const PropertyCard = ({ property }) => {
       <div className="flex gap-2 mb-2 w-full justify-start">
         <span className="bg-primary/80 text-white text-xs px-3 py-1 rounded-full font-semibold">{property.typeOfPropertyId}</span>
         <span className="bg-primary/60 text-white text-xs px-3 py-1 rounded-full font-semibold">{property.typeOfOperationId}</span>
-        {property.isExchanged && <span className="bg-green-400 text-white text-xs px-3 py-1 rounded-full font-semibold">En Canje</span>}
+        {property.isExchanged && <span className="bg-sky-400 text-white text-xs px-3 py-1 rounded-full font-semibold">En Canje</span>}
       </div>
       <h3 className="text-lg font-bold text-primary mb-2 text-center break-words w-full">{truncateText(property.propertyTitle, 50)}</h3>
       <p className="text-gray-700 text-sm mb-2 text-center break-words overflow-hidden w-full">{truncateText(property.propertyDescription, 100)}</p>
@@ -84,7 +39,9 @@ const PropertyCard = ({ property }) => {
       </p>
       {/* Precios */}
       <div className="flex gap-4 justify-center mb-2">
-        <span className="bg-primary/10 text-primary px-3 py-1 rounded font-bold text-sm">${property.propertyPrice}</span>
+        <span className="bg-primary/10 text-primary px-3 py-1 rounded font-bold text-sm">
+          {property.currencyId === 'UF' ? property.propertyPrice : `$${property.propertyPrice}`}
+        </span>
         <span className="bg-primary/10 text-primary px-3 py-1 rounded font-bold text-sm">{property.currencyId === 'CLP' ? 'CLP' : property.currencyId}</span>
       </div>
       {/* Características principales según tipo de inmueble */}

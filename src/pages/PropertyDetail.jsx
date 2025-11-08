@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPropertyById } from '../services/propertiesService';
 import { FaBed, FaBath, FaCar, FaRulerCombined, FaArrowLeft, FaChevronLeft, FaChevronRight, FaSearchPlus, FaHome } from 'react-icons/fa';
-import ImageLightbox from '../components/ImageLightbox';
+import ImageLightbox from '../components/ui/ImageLightbox';
 
 function PropertyDetail() {
   const { id } = useParams();
@@ -235,9 +235,13 @@ function PropertyDetail() {
             {/* Precio */}
             <div className="bg-primary/10 inline-block px-6 py-3 rounded-lg mb-6">
               <span className="text-3xl font-bold text-primary">
-                ${property.propertyPrice?.toLocaleString()}
+                {(property.currencyId && property.currencyId.replace(/\s+/g, '').toUpperCase() === 'UF')
+                  ? property.propertyPrice?.toLocaleString()
+                  : `$${property.propertyPrice?.toLocaleString()}`}
               </span>
               <span className="text-xl text-primary ml-2">{property.currencyId || 'CLP'}</span>
+              {/* Depuración: mostrar valor real de currencyId */}
+              {/* <span className="text-xs text-gray-400 ml-2">currencyId: [{property.currencyId}]</span> */}
             </div>
 
             {/* Características principales */}

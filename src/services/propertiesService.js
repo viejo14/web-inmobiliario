@@ -1,4 +1,4 @@
-import { API_CONFIG, getAuthHeaders } from "./config.js";
+import { API_CONFIG, getAuthHeaders } from "../constants/apiConfig.js";
 
 export const fetchProperties = async (filters = {}, page = 1, limit = 6) => {
   const excludeGuideValues = [

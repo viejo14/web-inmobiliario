@@ -1,5 +1,4 @@
 import React from 'react';
-import imgServicios from '../../public/img/img-header/Diseno_targ_present.png';
 
 const services = [
   {
@@ -40,7 +39,7 @@ function Servicios() {
       {/* Imagen decorativa debajo del header */}
       <div className="w-full" style={{marginTop: '0px'}}>
         <img
-          src={imgServicios}
+          src="/img/img9.jpg"
           alt="Decoración Servicios"
           className="w-full"
           style={{
